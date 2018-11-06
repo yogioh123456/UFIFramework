@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{E276046C-14E0-4667-BC9D-2A0527816405}</ProjectGuid>
+    <ProjectGuid>{082BE08A-35BE-7400-00F5-4BEAC6FDB3D3}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -60,6 +60,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\ConsoleTool\Scripts\ConsoleCommand.cs" />
+    <Compile Include="Assets\ConsoleTool\Scripts\InputTipsManager.cs" />
     <Compile Include="Assets\FairyGui\Source\Scripts\Core\BlendMode.cs" />
     <Compile Include="Assets\FairyGui\Source\Scripts\Core\CaptureCamera.cs" />
     <Compile Include="Assets\FairyGui\Source\Scripts\Core\Container.cs" />
@@ -200,6 +202,10 @@
     <Compile Include="Assets\FairyGui\Source\Scripts\Utils\XMLList.cs" />
     <Compile Include="Assets\FairyGui\Source\Scripts\Utils\XMLUtils.cs" />
     <Compile Include="Assets\FairyGui\Source\Scripts\Utils\ZipReader.cs" />
+    <Compile Include="Assets\HiDebug\Example\1\Example1.cs" />
+    <Compile Include="Assets\HiDebug\Example\2\Example2.cs" />
+    <Compile Include="Assets\HiDebug\Example\3\Example3.cs" />
+    <Compile Include="Assets\HiDebug\Example\4\Example4.cs" />
     <Compile Include="Assets\ILRuntime\CLR\Method\CLRMethod.cs" />
     <Compile Include="Assets\ILRuntime\CLR\Method\ExceptionHandler.cs" />
     <Compile Include="Assets\ILRuntime\CLR\Method\ILMethod.cs" />
@@ -428,25 +434,27 @@
     <Compile Include="Assets\Mono.Cecil.Pdb\pdb\Mono.Cecil.Pdb\PdbWriter.cs" />
     <Compile Include="Assets\Mono.Cecil.Pdb\pdb\Mono.Cecil.Pdb\SymDocumentWriter.cs" />
     <Compile Include="Assets\Mono.Cecil.Pdb\pdb\Mono.Cecil.Pdb\SymWriter.cs" />
+    <Compile Include="Assets\Test\TestCS.cs" />
     <None Include="Assets\FairyGui\Source\Resources\Shaders\FairyGUI-Image.shader" />
     <None Include="Assets\FairyGui\Source\Resources\Shaders\AddOn\FairyGUI-BlurFilter.shader" />
     <None Include="Assets\FairyGui\Source\Resources\Shaders\FairyGUI-BMFont.shader" />
     <None Include="Assets\FairyGui\Source\Resources\Shaders\FairyGUI-Text-Brighter.shader" />
     <None Include="Assets\FairyGui\Source\Resources\Shaders\FairyGUI-Text.shader" />
+    <None Include="Assets\HiDebug\readme.txt" />
     <Reference Include="Unity.TextMeshPro.Editor">
-      <HintPath>/Users/createbypennchen/UnityProject/FIUFramework/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+      <HintPath>/Users/createbypennchen/UnityProject/UFIFramework/UFIFramework/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.Android.Editor">
-      <HintPath>/Users/createbypennchen/UnityProject/FIUFramework/Library/ScriptAssemblies/Unity.Analytics.Android.Editor.dll</HintPath>
+      <HintPath>/Users/createbypennchen/UnityProject/UFIFramework/UFIFramework/Library/ScriptAssemblies/Unity.Analytics.Android.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.PackageManagerUI.Editor">
-      <HintPath>/Users/createbypennchen/UnityProject/FIUFramework/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
+      <HintPath>/Users/createbypennchen/UnityProject/UFIFramework/UFIFramework/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.CollabProxy.Editor">
-      <HintPath>/Users/createbypennchen/UnityProject/FIUFramework/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
+      <HintPath>/Users/createbypennchen/UnityProject/UFIFramework/UFIFramework/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro">
-      <HintPath>/Users/createbypennchen/UnityProject/FIUFramework/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+      <HintPath>/Users/createbypennchen/UnityProject/UFIFramework/UFIFramework/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>/Applications/Unity2018-3/Hub/Editor/2018.3.0b7/Unity.app/Contents/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
@@ -646,20 +654,23 @@
     <Reference Include="UnityEngine.SpatialTracking">
       <HintPath>/Applications/Unity2018-3/Hub/Editor/2018.3.0b7/Unity.app/Contents/UnityExtensions/Unity/UnitySpatialTracking/RuntimeEditor/UnityEngine.SpatialTracking.dll</HintPath>
     </Reference>
+    <Reference Include="HiDebug">
+      <HintPath>/Users/createbypennchen/UnityProject/UFIFramework/UFIFramework/Assets/HiDebug/HiDebug.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.Analytics.Editor">
-      <HintPath>/Users/createbypennchen/UnityProject/FIUFramework/Library/PackageCache/com.unity.analytics@3.0.9/Unity.Analytics.Editor.dll</HintPath>
+      <HintPath>/Users/createbypennchen/UnityProject/UFIFramework/UFIFramework/Library/PackageCache/com.unity.analytics@3.0.9/Unity.Analytics.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.StandardEvents">
-      <HintPath>/Users/createbypennchen/UnityProject/FIUFramework/Library/PackageCache/com.unity.analytics@3.0.9/Unity.Analytics.StandardEvents.dll</HintPath>
+      <HintPath>/Users/createbypennchen/UnityProject/UFIFramework/UFIFramework/Library/PackageCache/com.unity.analytics@3.0.9/Unity.Analytics.StandardEvents.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.Tracker">
-      <HintPath>/Users/createbypennchen/UnityProject/FIUFramework/Library/PackageCache/com.unity.analytics@3.0.9/Unity.Analytics.Tracker.dll</HintPath>
+      <HintPath>/Users/createbypennchen/UnityProject/UFIFramework/UFIFramework/Library/PackageCache/com.unity.analytics@3.0.9/Unity.Analytics.Tracker.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics">
-      <HintPath>/Users/createbypennchen/UnityProject/FIUFramework/Library/PackageCache/com.unity.analytics@3.0.9/Android/Unity.Analytics.dll</HintPath>
+      <HintPath>/Users/createbypennchen/UnityProject/UFIFramework/UFIFramework/Library/PackageCache/com.unity.analytics@3.0.9/Android/Unity.Analytics.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.Purchasing">
-      <HintPath>/Users/createbypennchen/UnityProject/FIUFramework/Library/PackageCache/com.unity.purchasing@2.0.1/UnityEngine.Purchasing.dll</HintPath>
+      <HintPath>/Users/createbypennchen/UnityProject/UFIFramework/UFIFramework/Library/PackageCache/com.unity.purchasing@2.0.1/UnityEngine.Purchasing.dll</HintPath>
     </Reference>
     <Reference Include="netstandard">
       <HintPath>/Applications/Unity2018-3/Hub/Editor/2018.3.0b7/Unity.app/Contents/NetStandard/ref/2.0.0/netstandard.dll</HintPath>

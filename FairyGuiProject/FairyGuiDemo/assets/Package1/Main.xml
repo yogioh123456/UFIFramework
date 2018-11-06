@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="1920,1080">
+  <displayList>
+    <image id="n0_oa79" name="n0" src="oa793" fileName="葱姜蒜.png" xy="726,323"/>
+    <component id="n1_oa79" name="n1" src="oa791" fileName="Button1.xml" xy="712,704" size="213,83"/>
+  </displayList>
+</component>
