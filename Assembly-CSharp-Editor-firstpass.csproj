@@ -744,6 +744,12 @@
       <HintPath>/Applications/Unity2018-3/Hub/Editor/2018.3.0b7/Unity.app/Contents/MonoBleedingEdge/lib/mono/unityscript/Boo.Lang.dll</HintPath>
     </Reference>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
+      <Project>{C85B8B3A-912A-5970-286A-1F0B5FE4EE03}</Project>
+      <Name>Assembly-CSharp-firstpass</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

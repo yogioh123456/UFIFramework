@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="UnityEngine">
+      <HintPath>..\..\..\..\..\..\..\..\Applications\Unity2018-3\Hub\Editor\2018.3.0b7\UnityEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>..\..\..\..\..\..\..\..\Applications\Unity2018-3\Hub\Editor\2018.3.0b7\UnityEngine.UI.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+</Project>

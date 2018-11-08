@@ -87,7 +87,7 @@ public class InputTipsManager : MonoBehaviour
         {
             //处理字符串
             string result = "";
-            string inputText = inputField.text;
+            string inputText = inputField.text.Trim();
             string[] parts = inputText.Split(' ');
             string command = parts[0];
             string[] args = parts.Skip(1).ToArray();

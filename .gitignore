@@ -8,3 +8,7 @@ obj/
 Temp/
 
 \.DS_Store
+
+\.vs/
+
+Packages/

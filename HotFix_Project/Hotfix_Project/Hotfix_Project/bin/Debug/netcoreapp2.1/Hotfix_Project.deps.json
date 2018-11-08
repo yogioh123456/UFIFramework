@@ -1,0 +1,53 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v2.1",
+    "signature": "da39a3ee5e6b4b0d3255bfef95601890afd80709"
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v2.1": {
+      "Hotfix_Project/1.0.0": {
+        "dependencies": {
+          "UnityEngine": "0.0.0.0",
+          "UnityEngine.UI": "1.0.0.0"
+        },
+        "runtime": {
+          "Hotfix_Project.dll": {}
+        }
+      },
+      "UnityEngine/0.0.0.0": {
+        "runtime": {
+          "UnityEngine.dll": {
+            "assemblyVersion": "0.0.0.0",
+            "fileVersion": "0.0.0.0"
+          }
+        }
+      },
+      "UnityEngine.UI/1.0.0.0": {
+        "runtime": {
+          "UnityEngine.UI.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Hotfix_Project/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "UnityEngine/0.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "UnityEngine.UI/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
