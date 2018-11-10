@@ -44,7 +44,7 @@ public class FairyGuiTest : MonoBehaviour
         mainView.AddRelation(GRoot.inst, RelationType.Size);
         GRoot.inst.AddChild(mainView);
 
-        GButton btn = mainView.GetChild("n1").asButton;
+        GButton btn = mainView.GetChild("Button_login").asButton;
         btn.onClick.Add(delegate ()
         {
             Debug.Log("haha");

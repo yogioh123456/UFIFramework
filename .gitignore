@@ -12,3 +12,9 @@ Temp/
 \.vs/
 
 Packages/
+UFI-github.csproj
+UFI-github.Editor.csproj
+UFI-github.Editor.Plugins.csproj
+UFI-github.Plugins.csproj
+UFI-github.sln
+UnityPackageManager/manifest.json

@@ -7,6 +7,10 @@
     <image id="oa793" name="葱姜蒜.png" path="/"/>
     <image id="oa794" name="胡萝卜.png" path="/"/>
     <image id="oa795" name="山竹.png" path="/"/>
+    <image id="qjg76" name="uibg.jpg" path="/"/>
+    <component id="qjg78" name="Button_login.xml" path="/"/>
+    <component id="qjg79" name="Button_set.xml" path="/"/>
+    <image id="qjg7a" name="导航.png" path="/"/>
   </resources>
-  <publish name="Package1" path="/Users/createbypennchen/UnityProject/UFIFramework/UFIFramework/Assets/Editor Default Resources/FairyGuiPublish"/>
+  <publish name="Package1" path="E:\gitUnity\UFI-github\Assets\Editor Default Resources\FairyGuiPublish"/>
 </packageDescription>
