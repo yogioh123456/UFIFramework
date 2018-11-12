@@ -341,6 +341,15 @@
     <Reference Include="UnityEditor.Purchasing">
       <HintPath>/Users/createbypennchen/UnityProject/UFIFramework/UFIFramework/Library/PackageCache/com.unity.purchasing@2.0.1/Editor/UnityEditor.Purchasing.dll</HintPath>
     </Reference>
+    <Reference Include="ExcelDataReader">
+      <HintPath>/Users/createbypennchen/UnityProject/UFIFramework/UFIFramework/Assets/Plugins/ExcelDataReader/ExcelDataReader.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib">
+      <HintPath>/Users/createbypennchen/UnityProject/UFIFramework/UFIFramework/Assets/Plugins/ExcelDataReader/ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="ExcelDataReader.DataSet">
+      <HintPath>/Users/createbypennchen/UnityProject/UFIFramework/UFIFramework/Assets/Plugins/ExcelDataReader/ExcelDataReader.DataSet.dll</HintPath>
+    </Reference>
     <Reference Include="mscorlib">
       <HintPath>/Applications/Unity2018-3/Hub/Editor/2018.3.0b7/Unity.app/Contents/MonoBleedingEdge/lib/mono/4.7.1-api/mscorlib.dll</HintPath>
     </Reference>

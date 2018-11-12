@@ -71,6 +71,8 @@
     <Compile Include="Assets\Plugins\IngameDebugConsole\Scripts\DebugLogPopup.cs" />
     <Compile Include="Assets\Plugins\IngameDebugConsole\Scripts\DebugLogRecycledListView.cs" />
     <Compile Include="Assets\Plugins\IngameDebugConsole\Scripts\DebugsOnScrollListener.cs" />
+    <None Include="Assets\Plugins\ExcelDataReader\ExcelDataReader.DataSet.xml" />
+    <None Include="Assets\Plugins\ExcelDataReader\ExcelDataReader.xml" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>/Users/createbypennchen/UnityProject/UFIFramework/UFIFramework/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
@@ -301,6 +303,15 @@
     </Reference>
     <Reference Include="UnityEngine.Purchasing">
       <HintPath>/Users/createbypennchen/UnityProject/UFIFramework/UFIFramework/Library/PackageCache/com.unity.purchasing@2.0.1/UnityEngine.Purchasing.dll</HintPath>
+    </Reference>
+    <Reference Include="ExcelDataReader">
+      <HintPath>/Users/createbypennchen/UnityProject/UFIFramework/UFIFramework/Assets/Plugins/ExcelDataReader/ExcelDataReader.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib">
+      <HintPath>/Users/createbypennchen/UnityProject/UFIFramework/UFIFramework/Assets/Plugins/ExcelDataReader/ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="ExcelDataReader.DataSet">
+      <HintPath>/Users/createbypennchen/UnityProject/UFIFramework/UFIFramework/Assets/Plugins/ExcelDataReader/ExcelDataReader.DataSet.dll</HintPath>
     </Reference>
     <Reference Include="netstandard">
       <HintPath>/Applications/Unity2018-3/Hub/Editor/2018.3.0b7/Unity.app/Contents/NetStandard/ref/2.0.0/netstandard.dll</HintPath>
