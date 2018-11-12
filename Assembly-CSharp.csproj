@@ -439,6 +439,7 @@
     <Compile Include="Assets\Scripts\HelloWorld.cs" />
     <Compile Include="Assets\Scripts\ILRuntimeTest.cs" />
     <Compile Include="Assets\Test\TestCS.cs" />
+    <None Include="Assets\Test\Main\UI_Main.txt" />
     <None Include="Assets\ReadMe.txt" />
     <None Include="Assets\FairyGui\Source\Resources\Shaders\FairyGUI-Image.shader" />
     <None Include="Assets\FairyGui\Source\Resources\Shaders\AddOn\FairyGUI-BlurFilter.shader" />
