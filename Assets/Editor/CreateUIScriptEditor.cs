@@ -90,4 +90,20 @@ public class CreateUIScriptEditor : MonoBehaviour
         }
         return null;
     }
+    //自动获取组件
+    /*UI命名规则
+     * Button_按钮
+     * Image_图片
+     * Text_文本
+     * Loader_装载器
+     * List_列表
+     * 
+     * 
+     * 
+     */
+    static string AutoGetComp(){
+        string content = "";
+
+        return content;
+    }
 }

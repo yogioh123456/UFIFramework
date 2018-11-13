@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="1000,800">
+  <displayList>
+    <graph id="n0_mrh4" name="n0" xy="1,-1" size="1000,800" type="rect">
+      <relation target="" sidePair="width-width,height-height"/>
+    </graph>
+    <image id="n1_mrh4" name="n1" src="oa794" fileName="胡萝卜.png" xy="165,146">
+      <relation target="" sidePair="center-center,middle-middle"/>
+    </image>
+    <image id="n2_mrh4" name="n2" src="oa795" fileName="山竹.png" xy="561,148">
+      <relation target="" sidePair="center-center,middle-middle"/>
+    </image>
+    <component id="n3_mrh4" name="n3" src="oa791" fileName="Button1.xml" xy="394,562" size="194,43">
+      <relation target="" sidePair="center-center,middle-middle"/>
+    </component>
+  </displayList>
+</component>

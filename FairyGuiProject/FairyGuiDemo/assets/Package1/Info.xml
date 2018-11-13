@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="1920,200">
+  <displayList>
+    <graph id="n0_mrh4" name="n0" xy="104,50" size="1684,100" type="rect">
+      <relation target="" sidePair="center-center,middle-middle"/>
+    </graph>
+    <text id="n1_mrh4" name="n1" xy="640,72" size="549,69" fontSize="57" align="center" vAlign="middle" text="hahah试试哈哈哈1111">
+      <relation target="" sidePair="center-center,middle-middle"/>
+    </text>
+  </displayList>
+</component>

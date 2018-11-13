@@ -434,10 +434,21 @@
     <Compile Include="Assets\Mono.Cecil.Pdb\pdb\Mono.Cecil.Pdb\PdbWriter.cs" />
     <Compile Include="Assets\Mono.Cecil.Pdb\pdb\Mono.Cecil.Pdb\SymDocumentWriter.cs" />
     <Compile Include="Assets\Mono.Cecil.Pdb\pdb\Mono.Cecil.Pdb\SymWriter.cs" />
+    <Compile Include="Assets\Scripts\BaseUICtrl.cs" />
+    <Compile Include="Assets\Scripts\BaseUIPanel.cs" />
+    <Compile Include="Assets\Scripts\BaseUIWindow.cs" />
     <Compile Include="Assets\Scripts\FairyGuiTest.cs" />
     <Compile Include="Assets\Scripts\Framework\Singleton.cs" />
     <Compile Include="Assets\Scripts\HelloWorld.cs" />
     <Compile Include="Assets\Scripts\ILRuntimeTest.cs" />
+    <Compile Include="Assets\Scripts\Main.cs" />
+    <Compile Include="Assets\Scripts\TestPopUI\TestPopUI_Control.cs" />
+    <Compile Include="Assets\Scripts\TestPopUI\TestPopUI_View.cs" />
+    <Compile Include="Assets\Scripts\TestUI\TestUI_Control\TestUI01_Ctrl.cs" />
+    <Compile Include="Assets\Scripts\TestUI\TestUI_View\TestUI01.cs" />
+    <Compile Include="Assets\Scripts\TestUI02\TestUI02_Control.cs" />
+    <Compile Include="Assets\Scripts\TestUI02\TestUI02_View.cs" />
+    <Compile Include="Assets\Scripts\UIManager.cs" />
     <Compile Include="Assets\Test\TestCS.cs" />
     <None Include="Assets\Test\Main\UI_Main.txt" />
     <None Include="Assets\ReadMe.txt" />
@@ -663,6 +674,15 @@
     <Reference Include="HiDebug">
       <HintPath>/Users/createbypennchen/UnityProject/UFIFramework/UFIFramework/Assets/HiDebug/HiDebug.dll</HintPath>
     </Reference>
+    <Reference Include="ExcelDataReader.DataSet">
+      <HintPath>/Users/createbypennchen/UnityProject/UFIFramework/UFIFramework/Assets/Plugins/ExcelDataReader/ExcelDataReader.DataSet.dll</HintPath>
+    </Reference>
+    <Reference Include="ExcelDataReader">
+      <HintPath>/Users/createbypennchen/UnityProject/UFIFramework/UFIFramework/Assets/Plugins/ExcelDataReader/ExcelDataReader.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib">
+      <HintPath>/Users/createbypennchen/UnityProject/UFIFramework/UFIFramework/Assets/Plugins/ExcelDataReader/ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.Analytics.Editor">
       <HintPath>/Users/createbypennchen/UnityProject/UFIFramework/UFIFramework/Library/PackageCache/com.unity.analytics@3.0.9/Unity.Analytics.Editor.dll</HintPath>
     </Reference>
@@ -677,15 +697,6 @@
     </Reference>
     <Reference Include="UnityEngine.Purchasing">
       <HintPath>/Users/createbypennchen/UnityProject/UFIFramework/UFIFramework/Library/PackageCache/com.unity.purchasing@2.0.1/UnityEngine.Purchasing.dll</HintPath>
-    </Reference>
-    <Reference Include="ExcelDataReader">
-      <HintPath>/Users/createbypennchen/UnityProject/UFIFramework/UFIFramework/Assets/Plugins/ExcelDataReader/ExcelDataReader.dll</HintPath>
-    </Reference>
-    <Reference Include="ICSharpCode.SharpZipLib">
-      <HintPath>/Users/createbypennchen/UnityProject/UFIFramework/UFIFramework/Assets/Plugins/ExcelDataReader/ICSharpCode.SharpZipLib.dll</HintPath>
-    </Reference>
-    <Reference Include="ExcelDataReader.DataSet">
-      <HintPath>/Users/createbypennchen/UnityProject/UFIFramework/UFIFramework/Assets/Plugins/ExcelDataReader/ExcelDataReader.DataSet.dll</HintPath>
     </Reference>
     <Reference Include="netstandard">
       <HintPath>/Applications/Unity2018-3/Hub/Editor/2018.3.0b7/Unity.app/Contents/NetStandard/ref/2.0.0/netstandard.dll</HintPath>

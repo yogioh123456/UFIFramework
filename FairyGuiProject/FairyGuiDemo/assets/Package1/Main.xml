@@ -5,7 +5,7 @@
       <relation target="" sidePair="width-width,height-height"/>
     </image>
     <image id="n0_oa79" name="n0" src="oa793" fileName="葱姜蒜.png" xy="422,651"/>
-    <component id="n4_qjg7" name="Button_login" src="qjg78" fileName="Button_login.xml" xy="732,828">
+    <component id="n4_qjg7" name="Button_login" src="qjg78" fileName="Button_login.xml" xy="734,972">
       <relation target="" sidePair="center-center,middle-middle"/>
     </component>
     <component id="n5_qjg7" name="Button_set" src="qjg79" fileName="Button_set.xml" xy="70,63">

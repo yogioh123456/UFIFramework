@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="1920,1080">
+  <displayList>
+    <image id="n1_mrh4" name="n1" src="mrh4f" fileName="select.jpg" xy="0,0">
+      <relation target="" sidePair="width-width,height-height"/>
+    </image>
+    <component id="n0_mrh4" name="Button_back" src="mrh4e" fileName="Button_back.xml" xy="42,21">
+      <relation target="" sidePair="center-center,middle-middle"/>
+    </component>
+    <component id="n2_mrh4" name="Button_pop" src="oa791" fileName="Button1.xml" xy="852,799" size="269,82">
+      <relation target="" sidePair="center-center,middle-middle"/>
+    </component>
+  </displayList>
+</component>

@@ -11,6 +11,11 @@
     <component id="qjg78" name="Button_login.xml" path="/"/>
     <component id="qjg79" name="Button_set.xml" path="/"/>
     <image id="qjg7a" name="导航.png" path="/"/>
+    <component id="mrh4b" name="Info.xml" path="/" exported="true"/>
+    <component id="mrh4c" name="Bag.xml" path="/" exported="true"/>
+    <component id="mrh4d" name="SelectRole.xml" path="/" exported="true"/>
+    <component id="mrh4e" name="Button_back.xml" path="/"/>
+    <image id="mrh4f" name="select.jpg" path="/"/>
   </resources>
-  <publish name="Package1" path="E:\gitUnity\UFI-github\Assets\Editor Default Resources\FairyGuiPublish"/>
+  <publish name="Package1" path="/Users/createbypennchen/UnityProject/UFIFramework/UFIFramework/Assets/Editor Default Resources/FairyGuiPublish"/>
 </packageDescription>
