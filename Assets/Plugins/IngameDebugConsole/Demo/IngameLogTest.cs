@@ -17,4 +17,16 @@ public class IngameLogTest : MonoBehaviour
     {
         
     }
+
+    public void LogInfo(){
+        Debug.Log("hahah");
+    }
+
+    public void LogWarring(){
+        Debug.LogWarning("111");
+    }
+
+    public void LogErroring(){
+        Debug.LogError("cuowu");
+    }
 }

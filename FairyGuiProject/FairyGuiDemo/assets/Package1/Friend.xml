@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="1920,1080">
+  <displayList>
+    <graph id="n0_p4gp" name="n0" xy="0,0" size="1920,1080" type="rect" lineSize="0" fillColor="#ff66cc00">
+      <relation target="" sidePair="width-width,height-height"/>
+    </graph>
+    <image id="n1_p4gp" name="n1" src="oa793" fileName="葱姜蒜.png" xy="283,142"/>
+    <image id="n2_p4gp" name="n2" src="oa794" fileName="胡萝卜.png" xy="299,358"/>
+    <component id="n4_p4gp" name="Button_confirm" src="p4gph" fileName="Button_Confirm.xml" xy="1520,857"/>
+    <text id="n5_p4gp" name="n5" xy="713,87" size="978,396" fontSize="45" autoSize="none" text="好友数据&#xA;&#xA;1111111111&#xA;222222222&#xA;33333333333"/>
+    <component id="n6_p4gp" name="Button_back" src="mrh4e" fileName="Button_back.xml" xy="36,22" size="143,145"/>
+    <list id="n7_p4gp" name="List_friend" xy="629,512" size="1003,229" layout="row" overflow="scroll" defaultItem="ui://9381c3rtoa793">
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+    </list>
+    <loader id="n8_p4gp" name="Loader_head" xy="213,596" size="248,214" url="ui://9381c3rtoa795"/>
+  </displayList>
+</component>

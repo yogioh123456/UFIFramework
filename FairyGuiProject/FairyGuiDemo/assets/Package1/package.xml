@@ -4,7 +4,7 @@
     <component id="oa790" name="Main.xml" path="/" exported="true"/>
     <component id="oa791" name="Button1.xml" path="/"/>
     <image id="oa792" name="土豆.png" path="/"/>
-    <image id="oa793" name="葱姜蒜.png" path="/"/>
+    <image id="oa793" name="葱姜蒜.png" path="/" exported="true"/>
     <image id="oa794" name="胡萝卜.png" path="/"/>
     <image id="oa795" name="山竹.png" path="/"/>
     <image id="qjg76" name="uibg.jpg" path="/"/>
@@ -16,6 +16,8 @@
     <component id="mrh4d" name="SelectRole.xml" path="/" exported="true"/>
     <component id="mrh4e" name="Button_back.xml" path="/"/>
     <image id="mrh4f" name="select.jpg" path="/"/>
+    <component id="p4gpg" name="Friend.xml" path="/" exported="true"/>
+    <component id="p4gph" name="Button_Confirm.xml" path="/"/>
   </resources>
   <publish name="Package1" path="/Users/createbypennchen/UnityProject/UFIFramework/UFIFramework/Assets/Editor Default Resources/FairyGuiPublish"/>
 </packageDescription>

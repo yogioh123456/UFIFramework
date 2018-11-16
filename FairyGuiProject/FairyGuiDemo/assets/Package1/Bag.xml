@@ -10,8 +10,9 @@
     <image id="n2_mrh4" name="n2" src="oa795" fileName="山竹.png" xy="561,148">
       <relation target="" sidePair="center-center,middle-middle"/>
     </image>
-    <component id="n3_mrh4" name="n3" src="oa791" fileName="Button1.xml" xy="394,562" size="194,43">
+    <component id="n3_mrh4" name="Button_Confirm" src="oa791" fileName="Button1.xml" xy="394,562" size="194,43">
       <relation target="" sidePair="center-center,middle-middle"/>
     </component>
+    <loader id="n4_kge9" name="Loader_pic" xy="353,362" size="134,120" url="ui://9381c3rtoa793" align="center" vAlign="middle"/>
   </displayList>
 </component>

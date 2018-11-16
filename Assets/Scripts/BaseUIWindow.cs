@@ -28,4 +28,8 @@ public class BaseUIWindow
         window.Show();
     }
 
+    protected virtual void GetFGUIComp()
+    {
+
+    }
 }

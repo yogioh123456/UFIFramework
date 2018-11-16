@@ -8,15 +8,17 @@ using System.Text;
 
 public class CreateUIScriptEditor : MonoBehaviour
 {
-    [MenuItem("Assets/创建UI脚本", priority = 0)]
+    [MenuItem("Assets/创建UIPanel脚本", priority = 0)]
     static void CreateUI(){
         //----------------------------配置fgui工程目录----------------------------
         string fguiProjectPath = Application.dataPath + @"/../FairyGuiProject/FairyGuiDemo/assets";
+        //----------------------------------------------------------------------
 
         print(fguiProjectPath);
         DirectoryInfo root = new DirectoryInfo(fguiProjectPath);
 
         xmlList.Clear();
+        packageDic.Clear();
         GetAllXML(root);
 
         string[] guidArray = Selection.assetGUIDs;
@@ -36,6 +38,7 @@ public class CreateUIScriptEditor : MonoBehaviour
                 print(xmlFile.ToString());
                 xmlDoc.Load(xmlFile.ToString());
                 XmlNodeList xnlist = xmlDoc.SelectSingleNode("component").ChildNodes;
+                string xmlContent = "";
                 foreach (XmlElement xe in xnlist)
                 {
                     foreach (XmlElement element in xe)
@@ -45,13 +48,14 @@ public class CreateUIScriptEditor : MonoBehaviour
                         var _attr = element.GetAttribute("id");
                         var _name = element.GetAttribute("name");
                         print("类型:"+ _type + " id:" + _attr + " 名称" + _name);
+                        xmlContent += "类型:" + _type + " id:" + _attr + " 名称" + _name + "\n        ";
 
-                        //------------------------写文件-------------------------//
-                        File.WriteAllText(selecetFloder + "/UI_" + selectName + ".txt", "xxx内容xxx", Encoding.UTF8);
-                        //刷新
-                        AssetDatabase.Refresh();
                     }
                 }
+                //------------------------写文件-------------------------//
+                File.WriteAllText(selecetFloder + "/UI_" + selectName + ".txt", AutoGetPanelComp(xmlContent,selectName), Encoding.UTF8);
+                //刷新
+                AssetDatabase.Refresh();
             }
             else{
                 Debug.LogError("没有这个ui文件" + selectName);
@@ -60,6 +64,7 @@ public class CreateUIScriptEditor : MonoBehaviour
     }
 
     static List<FileInfo> xmlList = new List<FileInfo>();
+    static Dictionary<string, string> packageDic = new Dictionary<string, string>();
     //获取所有xml文件
     static void GetAllXML(DirectoryInfo root){
 
@@ -76,6 +81,54 @@ public class CreateUIScriptEditor : MonoBehaviour
             {
                 xmlList.Add(file);
                 print(file.Name);
+                //查找package.xml文件
+                if (file.Name.Equals("package.xml"))
+                {
+                    CreatePackageDic(file);
+                }
+            }
+        }
+    }
+    //解析package.xml  生成 包---对应组件 的字典
+    static void CreatePackageDic(FileInfo xmlFile)
+    {
+        XmlDocument xmlDoc = new XmlDocument();
+        print(xmlFile.ToString());
+        xmlDoc.Load(xmlFile.ToString());
+        XmlNodeList xnlist = xmlDoc.SelectSingleNode("packageDescription").ChildNodes;
+
+        string packName = "";
+        //寻找包名
+        foreach (XmlElement xe in xnlist)
+        {
+            if (xe.Name == "publish")
+            {
+                print("包名---------" + xe.GetAttribute("name"));
+                packName = xe.GetAttribute("name");
+                break;
+            }
+        }
+        
+        //内容
+        foreach (XmlElement xe in xnlist)
+        {
+            foreach (XmlElement element in xe)
+            {
+                //-----------------------获取数据-------------------------//
+                var _type = element.Name;
+                if (_type == "component")
+                {
+                    var _name = element.GetAttribute("name");
+                    if (packageDic.ContainsKey(_name))
+                    {
+                        //有重复的，要么这个是没用的，要么弄错了，直接覆盖吧
+                        packageDic[_name] = packName;
+                    }
+                    else
+                    {
+                        packageDic.Add(_name, packName);
+                    }
+                }
             }
         }
     }
@@ -83,6 +136,7 @@ public class CreateUIScriptEditor : MonoBehaviour
     static FileInfo GetXmlByName(string xmlName){
         foreach (FileInfo item in xmlList)
         {
+            print("-----------------" + item.Name);
             if (item.Name.Equals(xmlName))
             {
                 return item;
@@ -99,11 +153,53 @@ public class CreateUIScriptEditor : MonoBehaviour
      * List_列表
      * 
      * 
-     * 
+     * 需要类名，包名，组件名
      */
-    static string AutoGetComp(){
+    static string AutoGetPanelComp(string xmlContent, string className){
         string content = "";
+        string packName = "";
+        if (packageDic.ContainsKey(className + ".xml"))
+        {
+            packName = packageDic[className + ".xml"];
+        }
+        else
+        {
+            print("找不到" + className + ".xml");
+            print("目前拥有===================================================");
+            //遍历
+            foreach (var _key in packageDic.Keys)
+            {
+                print(_key);
+            }
+            return "错误";
+        }
+        
 
+        string head = string.Format(
+            @"using System.Collections;
+using System.Collections.Generic;
+using FairyGUI;
+using UnityEngine;
+
+/// <summary>
+/// UI面板 {2}
+/// 类型 Panel
+/// 注意：本段代码由系统自动生成
+/// </summary>
+public class {1} : BaseUIPanel
+{{
+    public GButton btn_login;
+    public GTextField text_title;
+    public void OnCreatePanel(){{
+        base.OnCreate(""{3}"", ""{2}"");
+    }}
+
+    protected override void GetFGUIComp(){{
+        {0}
+    }}
+}}", xmlContent, "UI_"+className, className, packName);
+
+        content += head;
         return content;
     }
 }

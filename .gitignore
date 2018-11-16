@@ -18,3 +18,5 @@ UFI-github.Editor.Plugins.csproj
 UFI-github.Plugins.csproj
 UFI-github.sln
 UnityPackageManager/manifest.json
+
+\.idea/
