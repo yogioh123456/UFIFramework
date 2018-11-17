@@ -10,5 +10,8 @@
     <component id="n2_mrh4" name="Button_pop" src="oa791" fileName="Button1.xml" xy="852,799" size="269,82">
       <relation target="" sidePair="center-center,middle-middle"/>
     </component>
+    <component id="n3_sseo" name="Button_Next" src="oa791" fileName="Button1.xml" xy="1403,791" size="269,82">
+      <relation target="" sidePair="center-center,middle-middle"/>
+    </component>
   </displayList>
 </component>

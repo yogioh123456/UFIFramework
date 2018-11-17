@@ -1,24 +1,35 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using System.IO;
+using System.Linq;
+using System.Reflection;
 using System.Xml;
 using System.Text;
+using TMPro;
 
 public class CreateUIScriptEditor : MonoBehaviour
 {
+    //----------------------------配置fgui工程目录----------------------------
+    //fgui版本3.9.7
+    static string fguiProjectPath = Application.dataPath + @"/../FairyGuiProject/FairyGuiDemo/assets";
+    static string buttonNamed = "Button";
+    //注意点：按钮的命名必须带 buttonNamed这个字符串的内容 ，因这个类型在xml里面显示的是component，无法识别出 button ，所以需要在命名是给以规范
+    //但是我也并不知道GCompontnt能不能直接当按钮使用
+    //命名开头带"n" 的不会生成字段和方法，因为fgui里面命名开头带n就是未命名
+    //----------------------------------------------------------------------
+    
+    
     [MenuItem("Assets/创建UIPanel脚本", priority = 0)]
     static void CreateUI(){
-        //----------------------------配置fgui工程目录----------------------------
-        string fguiProjectPath = Application.dataPath + @"/../FairyGuiProject/FairyGuiDemo/assets";
-        //----------------------------------------------------------------------
-
         print(fguiProjectPath);
         DirectoryInfo root = new DirectoryInfo(fguiProjectPath);
 
         xmlList.Clear();
         packageDic.Clear();
+        compList.Clear();
         GetAllXML(root);
 
         string[] guidArray = Selection.assetGUIDs;
@@ -44,16 +55,25 @@ public class CreateUIScriptEditor : MonoBehaviour
                     foreach (XmlElement element in xe)
                     {
                         //-----------------------获取数据-------------------------//
+                        Dictionary<string,string> mDic = new Dictionary<string, string>();
                         var _type = element.Name;
                         var _attr = element.GetAttribute("id");
                         var _name = element.GetAttribute("name");
+                        //筛选未手动命名的，就是命名开头带'n'的
+                        if (_name[0].Equals('n'))
+                        {
+                            continue;
+                        }
+                        mDic.Add("type",_type);
+                        mDic.Add("id",_attr);
+                        mDic.Add("name",_name);
                         print("类型:"+ _type + " id:" + _attr + " 名称" + _name);
                         xmlContent += "类型:" + _type + " id:" + _attr + " 名称" + _name + "\n        ";
-
+                        compList.Add(mDic);
                     }
                 }
                 //------------------------写文件-------------------------//
-                File.WriteAllText(selecetFloder + "/UI_" + selectName + ".txt", AutoGetPanelComp(xmlContent,selectName), Encoding.UTF8);
+                File.WriteAllText(selecetFloder + "/UI_" + selectName + "View.cs", AutoGetPanelComp(selectName), Encoding.UTF8);
                 //刷新
                 AssetDatabase.Refresh();
             }
@@ -65,6 +85,7 @@ public class CreateUIScriptEditor : MonoBehaviour
 
     static List<FileInfo> xmlList = new List<FileInfo>();
     static Dictionary<string, string> packageDic = new Dictionary<string, string>();
+    static List<Dictionary<string,string>> compList = new List<Dictionary<string,string>>();
     //获取所有xml文件
     static void GetAllXML(DirectoryInfo root){
 
@@ -155,7 +176,7 @@ public class CreateUIScriptEditor : MonoBehaviour
      * 
      * 需要类名，包名，组件名
      */
-    static string AutoGetPanelComp(string xmlContent, string className){
+    static string AutoGetPanelComp(string className){
         string content = "";
         string packName = "";
         if (packageDic.ContainsKey(className + ".xml"))
@@ -188,18 +209,108 @@ using UnityEngine;
 /// </summary>
 public class {1} : BaseUIPanel
 {{
-    public GButton btn_login;
-    public GTextField text_title;
+    //---------------字段---------------
+    {4}
+    //创建面板
     public void OnCreatePanel(){{
         base.OnCreate(""{3}"", ""{2}"");
     }}
 
+    //获取组件的方法
     protected override void GetFGUIComp(){{
         {0}
     }}
-}}", xmlContent, "UI_"+className, className, packName);
+}}", GenMethod(), "UI_"+className+"View", className, packName, GenField());
 
         content += head;
         return content;
     }
+
+    //生成字段
+    static string GenField()
+    {
+        string content = "";
+        foreach (Dictionary<string,string> comp in compList)
+        {
+            content += "public G" + GetHeadUpString(comp["type"],comp["name"]) + " " + comp["name"] + ";\n    ";
+        }
+        return content;
+    }
+
+    //生成获取组件的方法
+    static string GenMethod()
+    {
+        string content = "";
+        foreach (Dictionary<string,string> comp in compList)
+        {
+            content += comp["name"] + " = " + "mainView.GetChild(" + "\"" + comp["name"] + "\"" + ").as" + GetHeadUpString(comp["type"],comp["name"]) + ";\n        ";
+        }
+        return content;
+    }
+
+    //生成对应的类型
+    static string GetHeadUpString(string content, string name)
+    {
+        //对Button命名特殊处理，因为xml读取的button类型是GCComponent类型
+        if (name.Contains(buttonNamed))
+        {
+            content = "button";
+        }
+        //text特殊处理
+        if (content.Equals("text"))
+        {
+            content = "TextField";
+        }
+        char[] s = content.ToCharArray();
+        s[0] = char.ToUpper(s[0]);
+        return s.ArrayToString();
+    }
+
+
+
+    #region 创建View 和 Control文件夹
+    //有必要吗？文件夹只有一个文件
+    [MenuItem("Assets/创建VC文件夹", priority = 0)]
+    static void CreateViewAndControl()
+    {
+        string[] guidArray = Selection.assetGUIDs;
+        foreach (var item in guidArray)
+        {
+            string selecetFloder = AssetDatabase.GUIDToAssetPath(item);
+            Directory.CreateDirectory(selecetFloder + "/View");
+            Directory.CreateDirectory(selecetFloder + "/Control");
+            AssetDatabase.Refresh();
+        }
+    }
+    #endregion
+
+    
+    #region 根据view生成Control文件
+    [MenuItem("Assets/创建Control脚本", priority = 0)]
+    static void CreateControlScript()
+    {
+        string[] guidArray = Selection.assetGUIDs;
+        foreach (var item in guidArray)
+        {
+            string selecetFloder = AssetDatabase.GUIDToAssetPath(item);
+            //反射view脚本，拿取数据
+            string selectName = Path.GetFileName(selecetFloder);
+            string className = selectName.Substring(0, selectName.Length - 3);
+            print("所选脚本" + className);
+            //根据类名获取类
+            
+            Type type =  Type.GetType(className);
+            //没有运行，这个无法获取
+            Debug.Log(type);
+            /*
+            PropertyInfo[] proInfo = type.GetProperties();
+            foreach (var field in proInfo)
+            {
+                Debug.Log(field);
+            }
+            */
+            AssetDatabase.Refresh();
+        }
+    }
+    #endregion
 }

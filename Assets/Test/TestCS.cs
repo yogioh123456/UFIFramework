@@ -8,6 +8,8 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.IO;
 using System;
+using System.Threading.Tasks;
+using System.Reflection;
 
 
 public class TestCS : MonoBehaviour
@@ -16,7 +18,13 @@ public class TestCS : MonoBehaviour
     void Start()
     {
         //读取excel
-        GameReadExcel("/Test/Excel/testExcel.xlsx");
+        //GameReadExcel("/Test/Excel/testExcel.xlsx");
+
+        //测试异步编程
+        //TestAsync();//建立异步任务
+        //tcs.SetResult(true);//执行异步任务
+
+        TestFS();
     }
 
     // Update is called once per frame
@@ -45,4 +53,29 @@ public class TestCS : MonoBehaviour
             }
         }
     }
+
+    async void TestAsync()
+    {
+        await MyTestTask();
+        Debug.Log("xxxx");
+    }
+    private TaskCompletionSource<bool> tcs;
+    Task<bool> MyTestTask()
+    {
+        tcs = new TaskCompletionSource<bool>();
+        Debug.Log("测试task方法");
+        return tcs.Task;
+    }
+
+    #region 反射
+    void TestFS()
+    {
+        Type type =  Type.GetType("UI_FriendView");
+        PropertyInfo[] proInfo = type.GetProperties();
+        foreach (var field in proInfo)
+        {
+            Debug.Log(field);
+        }
+    }
+    #endregion
 }

@@ -16,6 +16,16 @@ public class TestUI02_Control : BaseUICtrl
         myPanel.btn_pop.onClick.Add(delegate()
         {
             Debug.Log("弹窗");
+            Debug.Log(UnityScenesManager.Instance.curSceneName);
+        });
+        myPanel.btn_Next.onClick.Add(delegate()
+        {
+            //切换场景
+            Debug.Log("切换场景");
+            UnityScenesManager.Instance.LoadScene("Main2", delegate
+            {
+                Debug.Log("切换完成");
+            });
         });
     }
 

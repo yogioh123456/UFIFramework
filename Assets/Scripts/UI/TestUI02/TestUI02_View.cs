@@ -7,6 +7,7 @@ public class TestUI02_View : BaseUIPanel
 {
     public GButton btn_back;
     public GButton btn_pop;
+    public GButton btn_Next;
 
     public void OnCreatePanel()
     {
@@ -17,5 +18,6 @@ public class TestUI02_View : BaseUIPanel
     {
         btn_back = mainView.GetChild("Button_back").asButton;
         btn_pop = mainView.GetChild("Button_pop").asButton;
+        btn_Next = mainView.GetChild("Button_Next").asButton;
     }
 }
