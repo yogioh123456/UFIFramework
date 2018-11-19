@@ -273,7 +273,7 @@ public class {1} : BaseUIPanel
         return s.ArrayToString();
     }
 
-    //生成ctrl层脚本
+    //-------------------生成ctrl层脚本------------------------
     static string AutoGenControlScript(string className)
     {
         string content = "";
@@ -292,6 +292,7 @@ public class {0} : BaseUICtrl
     /// </summary>
     public void Init()
     {{
+        //------------------按钮添加事件-----------------
         {2}
     }}
 

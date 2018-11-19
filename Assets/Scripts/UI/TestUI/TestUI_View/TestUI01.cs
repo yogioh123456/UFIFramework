@@ -12,7 +12,7 @@ public class TestUI01 : BaseUIPanel
     public GButton btn_login;
     public GTextField text_title;
 
-    public void OnCreatePanel(){
+    public override void OnCreatePanel(){
         base.OnCreate("Package1", "Main");
     }
 

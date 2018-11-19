@@ -12,9 +12,14 @@ public class TestUI01_Ctrl : BaseUICtrl
     public TestUI01 myPanel;
 
     /// <summary>
-    /// 初始化
+    /// 构造函数 初始化
     /// </summary>
-    public void Init(){
+    public TestUI01_Ctrl(){
+        myPanel = new TestUI01();
+        myPanel.OnCreatePanel();
+        UIManager.Instance.uiPanelList.Add(myPanel.GetType().ToString(), myPanel);
+        UIManager.Instance.uiPanelCtrl.Add(this.GetType().ToString(), this);
+        
         myPanel.btn_login.onClick.Add(delegate ()
         {
             Debug.Log("haha!!!");

@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class BaseUICtrl
 {
-
+    //public BaseUIPanel myPanel;
 }

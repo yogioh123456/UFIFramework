@@ -29,14 +29,10 @@ public class UIManager : Singleton<UIManager>
     public void Test(){
         UIPackage.AddPackage("Assets/Editor Default Resources/FairyGuiPublish/Package1");
 
-        TestUI01 t01 = new TestUI01();
-        TestUI01_Ctrl tc01 = new TestUI01_Ctrl();
-        t01.OnCreatePanel();
-        tc01.myPanel = t01;
-        tc01.Init();
-        uiPanelList.Add(t01.GetType().ToString(), t01);
-        uiPanelCtrl.Add(tc01.GetType().ToString(), tc01);
+        //创建第一个面板
+        new TestUI01_Ctrl();
 
+        //创建第二个面板
         TestUI02_View t02 = new TestUI02_View();
         TestUI02_Control tc02 = new TestUI02_Control();
         t02.OnCreatePanel();
@@ -48,6 +44,8 @@ public class UIManager : Singleton<UIManager>
         OpenUIPanel("TestUI01");
     }
 
+    
+    
     /// <summary>
     /// 打开面板
     /// </summary>
@@ -66,6 +64,10 @@ public class UIManager : Singleton<UIManager>
         }
         else{
             Debug.LogError("没有这个面板");
+            //通过字符串 创建对象，然后再去尝试打开
+            //有必要这样做吗?
+            //或者是把类传过来,上面的判断还是可以把类转成字符串判断,但是这样好吗？增加了耦合？
+            //优化方案：打开时候不卡顿，那就提前new就好了，因为第一次打开是创建，优化就是事先创建，就不会卡顿了
         }
         Debug.Log(uiPanelStack.Count);
     }

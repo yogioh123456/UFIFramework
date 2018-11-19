@@ -30,6 +30,11 @@ public class BaseUIPanel
 
     }
 
+    public virtual void OnCreatePanel()
+    {
+        
+    }
+    
     protected virtual void GetFGUIComp(){
 
     }
