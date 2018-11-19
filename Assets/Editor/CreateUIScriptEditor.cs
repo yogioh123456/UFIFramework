@@ -20,10 +20,21 @@ public class CreateUIScriptEditor : MonoBehaviour
     //但是我也并不知道GCompontnt能不能直接当按钮使用
     //命名开头带"n" 的不会生成字段和方法，因为fgui里面命名开头带n就是未命名
     //----------------------------------------------------------------------
+
+
+    [MenuItem("Assets/创建UI View脚本", priority = 0)]
+    static void CreateUIView()
+    {
+        CreateUIScript("View.cs", AutoGetPanelComp);
+    }
+    [MenuItem("Assets/创建UI Control脚本", priority = 0)]
+    static void CreateUIControl()
+    {
+        CreateUIScript("Control.cs", AutoGenControlScript);
+    }
     
-    
-    [MenuItem("Assets/创建UIPanel脚本", priority = 0)]
-    static void CreateUI(){
+    delegate string AutonGenScript(string selectName);
+    static void CreateUIScript(string csSuffix, AutonGenScript ac){
         print(fguiProjectPath);
         DirectoryInfo root = new DirectoryInfo(fguiProjectPath);
 
@@ -72,8 +83,8 @@ public class CreateUIScriptEditor : MonoBehaviour
                         compList.Add(mDic);
                     }
                 }
-                //------------------------写文件-------------------------//
-                File.WriteAllText(selecetFloder + "/UI_" + selectName + "View.cs", AutoGetPanelComp(selectName), Encoding.UTF8);
+                //------------------------写文件View-------------------------//
+                File.WriteAllText(selecetFloder + "/UI_" + selectName + csSuffix, ac(selectName), Encoding.UTF8);
                 //刷新
                 AssetDatabase.Refresh();
             }
@@ -195,7 +206,6 @@ public class CreateUIScriptEditor : MonoBehaviour
             return "错误";
         }
         
-
         string head = string.Format(
             @"using System.Collections;
 using System.Collections.Generic;
@@ -225,7 +235,6 @@ public class {1} : BaseUIPanel
         content += head;
         return content;
     }
-
     //生成字段
     static string GenField()
     {
@@ -236,7 +245,6 @@ public class {1} : BaseUIPanel
         }
         return content;
     }
-
     //生成获取组件的方法
     static string GenMethod()
     {
@@ -247,7 +255,6 @@ public class {1} : BaseUIPanel
         }
         return content;
     }
-
     //生成对应的类型
     static string GetHeadUpString(string content, string name)
     {
@@ -266,8 +273,61 @@ public class {1} : BaseUIPanel
         return s.ArrayToString();
     }
 
+    //生成ctrl层脚本
+    static string AutoGenControlScript(string className)
+    {
+        string content = "";
+        string head = string.Format(@"using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
+//面板: {3}
+public class {0} : BaseUICtrl
+{{
+    //面板
+    public {1} myPanel;
 
+    /// <summary>
+    /// 初始化
+    /// </summary>
+    public void Init()
+    {{
+        {2}
+    }}
+
+    /// 面板打开
+    void OpenPanel(string panelName)
+    {{
+        UIManager.Instance.OpenUIPanel(panelName);
+    }}
+
+    /// <summary>
+    /// 面板回退
+    /// </summary>
+    void BackPanel()
+    {{
+        UIManager.Instance.BackUIPanel();
+    }}
+}}", "UI_"+className+"Control", "UI_"+className+"View", GenBtnEvent(), className);
+        content += head;
+        return content;
+    }
+    //自动生成按钮事件
+    static string GenBtnEvent()
+    {
+        string content = "";
+        foreach (Dictionary<string,string> comp in compList)
+        {
+            //对按钮处理
+            if (comp["name"].Contains(buttonNamed))
+            {
+                content += "myPanel." + comp["name"] + ".onClick.Add(delegate(){\n        \n        });\n         ";
+            }
+        }
+        return content;
+    }
+    
+    //这个没有必要
     #region 创建View 和 Control文件夹
     //有必要吗？文件夹只有一个文件
     [MenuItem("Assets/创建VC文件夹", priority = 0)]
@@ -284,33 +344,4 @@ public class {1} : BaseUIPanel
     }
     #endregion
 
-    
-    #region 根据view生成Control文件
-    [MenuItem("Assets/创建Control脚本", priority = 0)]
-    static void CreateControlScript()
-    {
-        string[] guidArray = Selection.assetGUIDs;
-        foreach (var item in guidArray)
-        {
-            string selecetFloder = AssetDatabase.GUIDToAssetPath(item);
-            //反射view脚本，拿取数据
-            string selectName = Path.GetFileName(selecetFloder);
-            string className = selectName.Substring(0, selectName.Length - 3);
-            print("所选脚本" + className);
-            //根据类名获取类
-            
-            Type type =  Type.GetType(className);
-            //没有运行，这个无法获取
-            Debug.Log(type);
-            /*
-            PropertyInfo[] proInfo = type.GetProperties();
-            foreach (var field in proInfo)
-            {
-                Debug.Log(field);
-            }
-            */
-            AssetDatabase.Refresh();
-        }
-    }
-    #endregion
 }

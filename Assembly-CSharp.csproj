@@ -436,6 +436,7 @@
     <Compile Include="Assets\Scripts\HelloWorld.cs" />
     <Compile Include="Assets\Scripts\ILRuntimeTest.cs" />
     <Compile Include="Assets\Scripts\Main.cs" />
+    <Compile Include="Assets\Scripts\UI\Friend\UI_FriendControl.cs" />
     <Compile Include="Assets\Scripts\UI\Friend\UI_FriendView.cs" />
     <Compile Include="Assets\Scripts\UI\TestPopUI\TestPopUI_Control.cs" />
     <Compile Include="Assets\Scripts\UI\TestPopUI\TestPopUI_View.cs" />
