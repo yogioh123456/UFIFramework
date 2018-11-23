@@ -21,16 +21,39 @@ public class CreateUIScriptEditor : MonoBehaviour
     //命名开头带"n" 的不会生成字段和方法，因为fgui里面命名开头带n就是未命名
     //----------------------------------------------------------------------
 
-
-    [MenuItem("Assets/创建UI View脚本", priority = 0)]
+    //panel
+    [MenuItem("Assets/创建UIPanel脚本/一键VC", priority = 0)]
+    static void CreateUIViewCtrl()
+    {
+        CreateUIView();
+        CreateUIControl();
+    }
+    [MenuItem("Assets/创建UIPanel脚本/View", priority = 0)]
     static void CreateUIView()
     {
         CreateUIScript("View.cs", AutoGetPanelComp);
     }
-    [MenuItem("Assets/创建UI Control脚本", priority = 0)]
+    [MenuItem("Assets/创建UIPanel脚本/Ctrl", priority = 0)]
     static void CreateUIControl()
     {
         CreateUIScript("Control.cs", AutoGenControlScript);
+    }
+    //window
+    [MenuItem("Assets/创建UIWindow脚本/一键VC", priority = 0)]
+    static void CreateUIWinViewCtrl()
+    {
+        CreateUIWinView();
+        CreateUIWinControl();
+    }
+    [MenuItem("Assets/创建UIWindow脚本/View", priority = 0)]
+    static void CreateUIWinView()
+    {
+        CreateUIScript("View.cs", AutoGenWindowViewScript);
+    }
+    [MenuItem("Assets/创建UIWindow脚本/Ctrl", priority = 0)]
+    static void CreateUIWinControl()
+    {
+        CreateUIScript("Control.cs", AutoGenWindowCtrlScript);
     }
     
     delegate string AutonGenScript(string selectName);
@@ -187,23 +210,14 @@ public class CreateUIScriptEditor : MonoBehaviour
      * 
      * 需要类名，包名，组件名
      */
+    //-------------------生成Panel-View层脚本-----------------------
     static string AutoGetPanelComp(string className){
         string content = "";
         string packName = "";
-        if (packageDic.ContainsKey(className + ".xml"))
+        bool isRight = CheckCompPack(className,ref packName);
+        if (!isRight)
         {
-            packName = packageDic[className + ".xml"];
-        }
-        else
-        {
-            print("找不到" + className + ".xml");
-            print("目前拥有===================================================");
-            //遍历
-            foreach (var _key in packageDic.Keys)
-            {
-                print(_key);
-            }
-            return "错误";
+            return "找不到" + className + ".xml";
         }
         
         string head = string.Format(
@@ -221,19 +235,46 @@ public class {1} : BaseUIPanel
 {{
     //---------------字段---------------
     {4}
+
+    public {1}()
+    {{
+        OnCreatePanel();
+        GetFGUIComp();
+    }}
+
     //创建面板
     public void OnCreatePanel(){{
         base.OnCreate(""{3}"", ""{2}"");
     }}
 
     //获取组件的方法
-    protected override void GetFGUIComp(){{
+    protected void GetFGUIComp(){{
         {0}
     }}
 }}", GenMethod(), "UI_"+className+"View", className, packName, GenField());
 
         content += head;
         return content;
+    }
+    //检查对应的UI组件是否存在
+    static bool CheckCompPack(string className, ref string packName)
+    {
+        if (packageDic.ContainsKey(className + ".xml"))
+        {
+            packName = packageDic[className + ".xml"];
+            return true;
+        }
+        else
+        {
+            print("找不到" + className + ".xml");
+            print("目前拥有===================================================");
+            //遍历
+            foreach (var _key in packageDic.Keys)
+            {
+                print(_key);
+            }
+            return false;
+        }
     }
     //生成字段
     static string GenField()
@@ -273,48 +314,77 @@ public class {1} : BaseUIPanel
         return s.ArrayToString();
     }
 
-    //-------------------生成ctrl层脚本------------------------
+    //-------------------生成Panel-ctrl层脚本------------------------
     static string AutoGenControlScript(string className)
     {
         string content = "";
         string head = string.Format(@"using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using FairyGUI;
 
 //面板: {3}
 public class {0} : BaseUICtrl
 {{
+    public GComponent mainView;
     //面板
     public {1} myPanel;
 
+    public {0}()
+    {{
+        myPanel = new {1}();
+        mainView = myPanel.mainView;
+        isScenePanel = true;//是否依赖于场景
+        UIManager.Instance.uiPanelCtrl.Add(this.GetType().ToString(), this);
+
+        ButtonAddClick();
+    }}
+
     /// <summary>
-    /// 初始化
+    /// 按钮添加事件
     /// </summary>
-    public void Init()
+    public void ButtonAddClick()
     {{
         //------------------按钮添加事件-----------------
         {2}
     }}
 
-    /// 面板打开
-    void OpenPanel(string panelName)
+    //打开新面板
+    void OpenNewPanel<T>() where T: new()
     {{
-        UIManager.Instance.OpenUIPanel(panelName);
+        UIManager.Instance.OpenUIPanel<T>();
     }}
-
-    /// <summary>
-    /// 面板回退
-    /// </summary>
+    //打开新窗口
+    public void OpenNewWindow<T>() where T : new()
+    {{
+        UIManager.Instance.OpenUIWindow<T>();
+    }}
+    //面板回退
     void BackPanel()
     {{
         UIManager.Instance.BackUIPanel();
     }}
-}}", "UI_"+className+"Control", "UI_"+className+"View", GenBtnEvent(), className);
+    //打开面板
+    public override void OpenPanel()
+    {{
+        mainView.visible = true;
+    }}
+    //关闭面板
+    public override void ClosePanel()
+    {{
+        mainView.visible = false;
+    }}
+    //面板销毁
+    public override void Dispose()
+    {{
+        mainView.Dispose();
+    }}
+}}", "UI_"+className+"Control", "UI_"+className+"View", GenBtnEvent("myPanel"), className);
         content += head;
         return content;
     }
     //自动生成按钮事件
-    static string GenBtnEvent()
+    static string GenBtnEvent(string panelWondow)
     {
         string content = "";
         foreach (Dictionary<string,string> comp in compList)
@@ -322,15 +392,118 @@ public class {0} : BaseUICtrl
             //对按钮处理
             if (comp["name"].Contains(buttonNamed))
             {
-                content += "myPanel." + comp["name"] + ".onClick.Add(delegate(){\n        \n        });\n         ";
+                content += panelWondow + "." + comp["name"] + ".onClick.Add(delegate(){\n        \n        });\n        ";
             }
         }
         return content;
     }
     
+    //-------------------生成Window-view层脚本------------------------
+    static string AutoGenWindowViewScript(string className)
+    {
+        string content = "";
+        string packName = "";
+        bool isRight = CheckCompPack(className,ref packName);
+        if (!isRight)
+        {
+            return "找不到" + className + ".xml";
+        }
+        
+        string head = string.Format(
+            @"using System.Collections;
+using System.Collections.Generic;
+using FairyGUI;
+using UnityEngine;
+
+/// <summary>
+/// UI面板 {2}
+/// 类型 Panel
+/// 注意：本段代码由系统自动生成
+/// </summary>
+public class {1} : BaseUIWindow
+{{
+    //---------------字段---------------
+    {4}
+
+    public {1}()
+    {{
+        OnCreatePanel();
+        GetFGUIComp();
+    }}
+
+    //创建面板
+    public void OnCreatePanel(){{
+        base.OnCreate(""{3}"", ""{2}"", true, true);
+    }}
+
+    //获取组件的方法
+    protected void GetFGUIComp(){{
+        {0}
+    }}
+}}", GenMethod(), "UI_"+className+"View", className, packName, GenField());
+
+        content += head;
+        return content;
+    }
+    
+    //-------------------生成Window-ctrl层脚本------------------------
+    static string AutoGenWindowCtrlScript(string className)
+    {
+        string content = "";
+        string head = string.Format(@"using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using FairyGUI;
+
+//面板: {3}
+public class {0} : BaseUICtrl
+{{
+    //面板
+    public {1} myWindow;
+
+    public {0}()
+    {{
+        myWindow = new {1}();
+        isScenePanel = true;//是否依赖于场景
+        UIManager.Instance.uiWindowCtrl.Add(this.GetType().ToString(), this);
+
+        ButtonAddClick();
+    }}
+
+    /// <summary>
+    /// 按钮添加事件
+    /// </summary>
+    public void ButtonAddClick()
+    {{
+        //------------------按钮添加事件-----------------
+        {2}
+    }}
+
+    //打开面板
+    public override void OpenPanel()
+    {{
+        myWindow.window.Show();
+    }}
+    //关闭面板
+    public override void ClosePanel()
+    {{
+        myWindow.window.Hide();
+    }}
+    //面板销毁
+    public override void Dispose()
+    {{
+        myWindow.window.Dispose();
+    }}
+}}", "UI_"+className+"Control", "UI_"+className+"View", GenBtnEvent("myWindow"), className);
+        content += head;
+        return content;
+    }
+    
+    
     //这个没有必要
     #region 创建View 和 Control文件夹
     //有必要吗？文件夹只有一个文件
+    /*
     [MenuItem("Assets/创建VC文件夹", priority = 0)]
     static void CreateViewAndControl()
     {
@@ -343,6 +516,7 @@ public class {0} : BaseUICtrl
             AssetDatabase.Refresh();
         }
     }
+    */
     #endregion
 
 }

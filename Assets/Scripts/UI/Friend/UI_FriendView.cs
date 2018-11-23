@@ -16,13 +16,20 @@ public class UI_FriendView : BaseUIPanel
     public GList List_friend;
     public GLoader Loader_head;
     
+
+    public UI_FriendView()
+    {
+        OnCreatePanel();
+        GetFGUIComp();
+    }
+
     //创建面板
     public void OnCreatePanel(){
         base.OnCreate("Package1", "Friend");
     }
 
     //获取组件的方法
-    protected override void GetFGUIComp(){
+    protected void GetFGUIComp(){
         Button_confirm = mainView.GetChild("Button_confirm").asButton;
         Button_back = mainView.GetChild("Button_back").asButton;
         List_friend = mainView.GetChild("List_friend").asList;

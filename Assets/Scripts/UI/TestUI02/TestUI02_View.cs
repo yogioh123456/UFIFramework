@@ -9,12 +9,18 @@ public class TestUI02_View : BaseUIPanel
     public GButton btn_pop;
     public GButton btn_Next;
 
+    public TestUI02_View()
+    {
+        OnCreatePanel();
+    }
+    
     public void OnCreatePanel()
     {
         base.OnCreate("Package1", "SelectRole");
+        GetFGUIComp();
     }
 
-    protected override void GetFGUIComp()
+    protected void GetFGUIComp()
     {
         btn_back = mainView.GetChild("Button_back").asButton;
         btn_pop = mainView.GetChild("Button_pop").asButton;

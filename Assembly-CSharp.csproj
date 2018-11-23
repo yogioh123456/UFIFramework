@@ -440,8 +440,8 @@
     <Compile Include="Assets\Scripts\UI\Friend\UI_FriendView.cs" />
     <Compile Include="Assets\Scripts\UI\TestPopUI\TestPopUI_Control.cs" />
     <Compile Include="Assets\Scripts\UI\TestPopUI\TestPopUI_View.cs" />
-    <Compile Include="Assets\Scripts\UI\TestUI\TestUI_Control\TestUI01_Ctrl.cs" />
-    <Compile Include="Assets\Scripts\UI\TestUI\TestUI_View\TestUI01.cs" />
+    <Compile Include="Assets\Scripts\UI\TestUI\TestUI01.cs" />
+    <Compile Include="Assets\Scripts\UI\TestUI\TestUI01_Ctrl.cs" />
     <Compile Include="Assets\Scripts\UI\TestUI02\TestUI02_Control.cs" />
     <Compile Include="Assets\Scripts\UI\TestUI02\TestUI02_View.cs" />
     <Compile Include="Assets\Scripts\UI\UnityScenesManager.cs" />

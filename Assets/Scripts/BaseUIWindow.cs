@@ -17,19 +17,42 @@ public class BaseUIWindow
             如果你不需要这个灰色效果，那么把透明度设置为0即可。
      *ShowModalWait   锁定窗口，不允许任何操作。锁定时可以显示一个提示
      *CloseModalWait  取消窗口的锁定。
+     * 
+     * 点击空白处关闭，fgui的Popup功能
+     *     - 弹出在自定义的位置
+     *     - GRoot.inst.ShowPopup(aComponent);
+     *     - aComponent.SetXY(100, 100);
+     * 
+     * 弹出窗口，播放动画：重写父类的doShowAnimation方法
+     * 关闭窗口，隐藏动画：重写父类的doHideAnimation方法
+     * 新建类，继承window，重写动画方法，建窗口直接new 这个类 就行
+     * 创建新类用来表示新的窗口，现在只有2种窗口，panel, window
     */
 
     public Window window;
+    public GComponent mainView;
 
-    public void OnCreate(string packName, string compName, bool isModal = false){
+    public void OnCreate(string packName, string compName, bool isModal, bool isPopup = false){
         window = new Window();
         window.contentPane = UIPackage.CreateObject(packName, compName).asCom;
-        window.modal = isModal;
-        window.Show();
+        mainView = window.contentPane;
+        window.modal = isModal;//模态窗口，背后不可点击
+        window.Center();
+        if (isPopup)
+        {
+            GRoot.inst.ShowPopup(window);
+        }
+        else
+        {
+            window.Show();
+        }
+        
     }
-
+    
+    /*
     protected virtual void GetFGUIComp()
     {
 
     }
+    */
 }

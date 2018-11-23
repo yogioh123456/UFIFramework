@@ -8,17 +8,25 @@ using UnityEngine;
 /// </summary>
 public class TestPopUI_View : BaseUIWindow
 {
+    
     public GButton btn_confirm;
     public GLoader loader_pic;
 
+    public TestPopUI_View()
+    {
+        OnCreatePanel();
+        GetFGUIComp();
+    }
+    
     public void OnCreatePanel()
     {
-        base.OnCreate("Package1", "SelectRole");
+        //包名，组件名，模态窗口，点击空白处关闭（可选）
+        base.OnCreate("Package1", "Bag", true, true);
     }
 
-    protected override void GetFGUIComp()
+    protected void GetFGUIComp()
     {
-        btn_confirm = window.GetChild("Button_Confirm").asButton;
-        loader_pic = window.GetChild("Loader_pic").asLoader;
+        btn_confirm = mainView.GetChild("Button_Confirm").asButton;
+        loader_pic = mainView.GetChild("Loader_pic").asLoader;
     }
 }

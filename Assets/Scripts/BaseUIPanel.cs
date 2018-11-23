@@ -23,36 +23,16 @@ public class BaseUIPanel
         mainView.SetSize(GRoot.inst.width, GRoot.inst.height);
         mainView.AddRelation(GRoot.inst, RelationType.Size);
         GRoot.inst.AddChild(mainView);
-        GetFGUIComp();
         //先关掉
         mainView.visible = false;
         //
 
     }
-
-    public virtual void OnCreatePanel()
-    {
-        
-    }
     
-    protected virtual void GetFGUIComp(){
-
-    }
-
-    /// <summary>
-    /// 打开面板
-    /// </summary>
-    public void OpenPanel()
+    /*
+    protected virtual void GetFGUIComp()
     {
-        mainView.visible = true;
-        //或者把oncreate写在这里，判断mainView值是否为空，空去调用oncreate，不是空直接设置visible
-    }
 
-    /// <summary>
-    /// 关闭面板，一般情况不需要主动调用的，在切换界面时，框架会自动调用
-    /// </summary>
-    public void ClosePanel()
-    {
-        mainView.visible = false;
     }
+    */
 }

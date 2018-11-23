@@ -8,15 +8,21 @@ using UnityEngine;
 /// View 由代码自动生成
 /// </summary>
 public class TestUI01 : BaseUIPanel
-{
+{    
     public GButton btn_login;
     public GTextField text_title;
 
-    public override void OnCreatePanel(){
+    public TestUI01()
+    {
+        OnCreatePanel();
+    }
+    
+    public void OnCreatePanel(){
         base.OnCreate("Package1", "Main");
+        GetFGUIComp();
     }
 
-    protected override void GetFGUIComp(){
+    public void GetFGUIComp(){
         btn_login = mainView.GetChild("Button_login").asButton;
         text_title = mainView.GetChild("Text_title").asTextField;
     }
