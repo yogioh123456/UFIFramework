@@ -446,6 +446,8 @@
     <Compile Include="Assets\Scripts\UI\TestUI02\TestUI02_View.cs" />
     <Compile Include="Assets\Scripts\UI\UnityScenesManager.cs" />
     <Compile Include="Assets\Scripts\UIManager.cs" />
+    <Compile Include="Assets\Test\ByteArray\TestByteArray.cs" />
+    <Compile Include="Assets\Test\DeCode\DeCode.cs" />
     <Compile Include="Assets\Test\HttpPost\HttpPostTest.cs" />
     <Compile Include="Assets\Test\HttpPost\WebRequest.cs" />
     <Compile Include="Assets\Test\TestCS.cs" />
